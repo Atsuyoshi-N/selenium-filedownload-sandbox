@@ -18,13 +18,14 @@ class CrawlAndUploadCsvFileJob < ApplicationJob
     command_hash = { cmd: 'Page.setDownloadBehavior',
                      params: {
       behavior: 'allow',
-      downloadPath: File.absolute_path(Rails.root)
+      downloadPath: File.absolute_path(Rails.root) # download directory
       }
     }
     bridge.http.call(:post, path, command_hash)
-    url = 'http://localhost:8080'.freeze
+    url = ENV['CSV_DOWNLOAD_URL'].to_s.freeze
     driver.navigate.to url
-    csv_download_link = driver.find_element(:link, 'CSVをダウンロードする').click
+    csv_download_link = driver.find_element(:link, 'CSVをダウンロードする')
+    csv_download_link.click
     puts 'ダウンロードされました'
   end
 end

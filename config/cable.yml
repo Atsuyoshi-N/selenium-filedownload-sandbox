@@ -1,0 +1,10 @@
+development:
+  adapter: async
+
+test:
+  adapter: async
+
+production:
+  adapter: redis
+  url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
+  channel_prefix: crawl_with_capybara_sandbox_production

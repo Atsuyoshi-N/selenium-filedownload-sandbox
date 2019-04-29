@@ -15,6 +15,7 @@
 
 /lib/sample/*
 Masked*
+index.html
 
 # Ignore uploaded files in development
 /storage/*

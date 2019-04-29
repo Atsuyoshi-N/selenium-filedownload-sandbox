@@ -17,7 +17,7 @@ class CrawlAndUploadCsvFileJob < ApplicationJob
     command_hash = { cmd: 'Page.setDownloadBehavior',
                      params: {
       behavior: 'allow',
-      downloadPath: File.absolute_path(Rails.root) # download directory
+      downloadPath: File.absolute_path(File.expand_path('./tmp', Rails.root)) # download directory
       }
     }
     bridge.http.call(:post, path, command_hash)

@@ -1,5 +1,4 @@
 require 'capybara'
-# require 'capybara/rspec'
 require 'selenium-webdriver'
 
 class CrawlAndUploadCsvFileJob < ApplicationJob

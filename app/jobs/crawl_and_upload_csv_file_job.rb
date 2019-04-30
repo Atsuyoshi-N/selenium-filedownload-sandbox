@@ -7,8 +7,10 @@ class CrawlAndUploadCsvFileJob < ApplicationJob
 
   def perform(*args)
     chrome_options = Selenium::WebDriver::Chrome::Options.new
-    download_file_name = "csv_#{Time.zone.now.strftime("%Y%m%d-%H-%M-%S")}"
-    download_file_path = File.expand_path("./tmp/#{download_file_name}", File.absolute_path(Rails.root))
+    # download_file_name = "csv_#{Time.zone.now.strftime("%Y%m%d-%H-%M-%S")}"
+    # download_file_path = File.expand_path("./tmp/#{download_file_name}", File.absolute_path(Rails.root))
+    download_file_path = File.expand_path("./tmp", File.absolute_path(Rails.root))
+    puts download_file_path
     options = ["--headless", '--no-sandbox', '--disable-gpu', '--disable-popup-blocking', '--window-size=1440,900']
     options.each do |option|
       chrome_options.add_argument(option)

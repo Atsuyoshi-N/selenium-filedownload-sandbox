@@ -30,14 +30,14 @@ class CrawlAndUploadCsvFileJob < ApplicationJob
     driver.navigate.to url
     csv_download_link = driver.find_element(:link, 'CSVをダウンロードする')
     download_file = csv_download_link.click
-    sleep(20)
+    sleep(3)
 
     store = Store.last
     file_location = Dir.glob(download_file_path+"/*.csv")[0]
-    filename = File.open(Dir.glob(download_file_path+"/*.csv")[0][/[a-zA-Z0-9\-\_]*\.csv$/])
+    filename = Dir.glob(download_file_path+"/*.csv")[0][/tmp\/[a-zA-Z0-9\-\_]*\.csv$/]
     puts file_location
     puts filename
-    store.csv_file.attach(io: File.open(file_location), filename: filename, content_type: Mime[:csv].to_s)
+    store.csv_file.attach(io: File.open(file_location), filename: File.open(filename), content_type: Mime[:csv].to_s)
 
   end
 

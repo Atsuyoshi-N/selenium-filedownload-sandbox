@@ -35,6 +35,8 @@ class CrawlAndUploadCsvFileJob < ApplicationJob
     store = Store.last
     file_location = Dir.glob(download_file_path+"/*.csv")[0]
     filename = File.open(Dir.glob(download_file_path+"/*.csv")[0][/[a-zA-Z0-9\-\_]*\.csv$/])
+    puts file_location
+    puts filename
     store.csv_file.attach(io: File.open(file_location), filename: filename, content_type: Mime[:csv].to_s)
 
   end
